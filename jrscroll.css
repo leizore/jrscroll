@@ -1,0 +1,60 @@
+.jrscroll-downwarp {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+.jrscroll-downwarp .downwarp-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 24px;
+    padding: 10px 0;
+}
+.jrscroll-downwarp .downwarp-content .downwarp-progress {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    margin-right: 8px;
+    border-bottom-color: transparent;
+    vertical-align: middle;
+}
+.jrscroll-downwarp .downwarp-content .downwarp-tip {
+    display: inline-block;
+    font-size: 12px;
+    color: gray;
+    vertical-align: middle;
+}
+.jrscroll-upwarp {
+    min-height: 25px;
+    padding: 15px 0;
+    text-align: center;
+    visibility: hidden;
+}
+.jrscroll-upwarp .upwarp-progress {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    margin-right: 8px;
+    border-bottom-color: transparent;
+    vertical-align: middle;
+    animation: linearRotate 0.5s linear infinite;
+}
+.jrscroll-upwarp .upwarp-tip {
+    display: inline-block;
+    font-size: 12px;
+    color: gray;
+    vertical-align: middle;
+}
+@keyframes linearRotate {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}

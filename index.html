@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>下拉刷新</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="jrscroll.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .lists {
+            list-style: none;
+            text-align: center;
+            font-size: 24px;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-wrap">
+        <ul class="lists">
+            <!-- <li>我是第1条数据</li>
+            <li>我是第2条数据</li>
+            <li>我是第3条数据</li>
+            <li>我是第4条数据</li>
+            <li>我是第5条数据</li>
+            <li>我是第6条数据</li>
+            <li>我是第7条数据</li>
+            <li>我是第8条数据</li>
+            <li>我是第9条数据</li>
+            <li>我是第10条数据</li>
+            <li>我是第11条数据</li>
+            <li>我是第12条数据</li>
+            <li>我是第13条数据</li>
+            <li>我是第14条数据</li>
+            <li>我是第15条数据</li>
+            <li>我是第16条数据</li>
+            <li>我是第17条数据</li>
+            <li>我是第18条数据</li>
+            <li>我是第19条数据</li> -->
+        </ul>
+    </div>
+</body>
+<script src="./1.js"></script>
+<script>
+    var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+     function render () {
+        var html = ''
+        for(var i = 0; i < data.length; i++) {
+            html = html + '<li>我是第'+data[i]+'条数据</li>'
+        }
+        document.querySelector('.lists').innerHTML = html
+    }
+    
+    window.onload = function () {
+        render()
+
+        var scrollWrap = document.querySelector('.scroll-wrap');
+        var scroll = new JrRefresh(scrollWrap, {
+            downCallback: pullDownRefresh,
+            upCallback: pullUpLoadMore
+        })
+
+        function pullDownRefresh() {
+            setTimeout(() => {
+                console.log('刷新成功')
+                data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+                render()
+                scroll.endSuccess(true)
+            }, 1000)
+
+        }
+        function pullUpLoadMore() {
+            setTimeout(() => {
+                console.log('请求成功')
+                var lastArr = data.slice(-10).map((i) => {
+                    return i + 10
+                })
+                data = data.concat(lastArr)
+                render()
+                scroll.endSuccess(true)
+            }, 2000)
+
+        }
+    }
+   
+</script>
+</html>
