@@ -44,7 +44,7 @@
         </ul>
     </div>
 </body>
-<script src="./1.js"></script>
+<script src="./jrscroll.js"></script>
 <script>
     var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
      function render () {
@@ -54,7 +54,7 @@
         }
         document.querySelector('.lists').innerHTML = html
     }
-    
+
     window.onload = function () {
         render()
 
@@ -82,10 +82,10 @@
                 data = data.concat(lastArr)
                 render()
                 scroll.endSuccess(true)
-            }, 2000)
+            }, 1000)
 
         }
     }
-   
+
 </script>
 </html>
