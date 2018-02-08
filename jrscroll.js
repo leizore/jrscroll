@@ -17,12 +17,6 @@ function JrRefresh (el, options) {
     this.isLoadMore = false    // 是否正在加载数据
     this.hasMore = true        // 是否有更多数据
     this.rotateTimer = null    // 控制 下拉刷新 转圈 的时间计时器
-    this.height = window.innerHeight ||
-                  document.documentElement.clientHeight ||
-                  document.body.clientHeight
-    setTimeout(() => {
-        this.offsetHeight = document.documentElement.offsetHeight
-    }, 100)
     this.event()
     this.init()
 }
@@ -143,7 +137,6 @@ JrRefresh.prototype.endSuccess = function (bool) {
                 this.moveBack(0)
                 this.isRefresh = false
                 clearInterval(this.rotateTimer)
-                // this.offsetHeight = document.documentElement.offsetHeight
             },500)
         } else {
             this.toggleLoadingText(true)
@@ -155,9 +148,6 @@ JrRefresh.prototype.endSuccess = function (bool) {
         this.loadMore.style.visibility = 'hidden'
         this.toggleLoadingText(bool)
     }
-    setTimeout(() => {
-        this.offsetHeight = document.documentElement.offsetHeight
-    }, 100)         // 重新计算页面高度，延迟是为了让页面渲染完成才进行计算
 }
 JrRefresh.prototype.toggleLoadingText = function (hasMore) {
     if (hasMore) {
@@ -170,12 +160,8 @@ JrRefresh.prototype.toggleLoadingText = function (hasMore) {
     }
 }
 JrRefresh.prototype.handleScroll = function () {
-    var scrollTop = document.documentElement.scrollTop ||
-                      window.pageYOffset ||
-                      document.body.scrollTop
-    var orBottom = Math.abs(scrollTop + this.height - this.offsetHeight)
-    console.log(orBottom)
-    if (orBottom < this.options.dis && !this.isLoadMore && this.hasMore) {
+    var top = this.loadMore.getBoundingClientRect().top;    // 获取最底部标签距离屏幕顶部的距离
+    if (top + 10 < window.innerHeight  < this.options.dis && !this.isLoadMore && this.hasMore) {
         this.isLoadMore = true
         this.loadMore.style.visibility = 'visible'
         this.options.upCallback()
